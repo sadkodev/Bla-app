@@ -4,6 +4,7 @@ export default function ButtonReact() {
   const [count, setCount] = useState(0);
 
   function handlerClick() {
+    console.log("Helloooo");
     setCount(count + 1);
   }
 
