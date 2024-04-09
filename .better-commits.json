@@ -90,12 +90,12 @@
         "label": "shared"
       },
       {
-        "value": "server",
-        "label": "server"
+        "value": "api",
+        "label": "api"
       },
       {
-        "value": "tools",
-        "label": "tools"
+        "value": "utils",
+        "label": "utils"
       },
       {
         "value": "",
