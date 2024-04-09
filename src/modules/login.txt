@@ -1,0 +1,9 @@
+Este es un login de prueba, por favor ingrese con los siguientes datos:</p>
+        <p>Usuario: admin</p>
+        <p>Contraseña: admin</p>
+        <form action="login.php" method="post">
+            <input type="text" name="usuario" placeholder="Usuario">
+            <input type="password" name="contrasena" placeholder="Contraseña">
+            <input type="submit" value="Ingresar">
+        </form>
+    </body>
