@@ -1,0 +1,14 @@
+---
+const { label, className, state } = Astro.props
+---
+
+<button
+    class:list={[
+        'bg-primary w-48 px-8 py-4 uppercase font-bold text-gray-100 rounded-xl hover:bg-primary/80',
+        state ? className : '',
+    ]}
+>
+    <slot name="left" />
+    {label}
+    <slot name="right" />
+</button>

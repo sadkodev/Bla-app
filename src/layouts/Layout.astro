@@ -1,4 +1,6 @@
 ---
+import Header from '@components/globals/Header.astro'
+
 interface Props {
     title: string
 }
@@ -17,7 +19,8 @@ const languages = Astro.currentLocale
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <body class="bg-gray-800">
+    <body class="bg-bg_color-dark">
+        <Header />
         <main class="flex flex-col">
             <slot />
         </main>
