@@ -1,0 +1,8 @@
+---
+import Form from '@components/globals/Form.astro'
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout title="Sign In">
+    <Form action="/api/signin" method="POST" cta="Log in" button={false} />
+</Layout>
