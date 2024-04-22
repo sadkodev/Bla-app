@@ -26,3 +26,4 @@ pnpm-debug.log*
 # git packager maanager
 .package-lock.json
 .pnpm-lock.yaml
+bun.lockb
