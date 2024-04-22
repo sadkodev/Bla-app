@@ -1,0 +1,13 @@
+---
+import Form from '@components/globals/Form.astro'
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout title="signup">
+    <Form
+        action="/api/signup"
+        method="POST"
+        cta="Create Account"
+        button={true}
+    />
+</Layout>
