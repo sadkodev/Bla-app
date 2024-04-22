@@ -1,5 +1,8 @@
 ---
+import Cam from '@components/globals/Cam.astro'
+import Cam2 from '@components/globals/Cam2.astro'
 import Layout from '@layouts/Layout.astro'
+
 const user = Astro.locals.user
 
 const username = user ? user.username : 'Guest'
@@ -17,6 +20,7 @@ const username = user ? user.username : 'Guest'
                         Sign out
                     </button>
                 </form>
+                <Cam2 />
             </>
         )
     }
@@ -34,3 +38,4 @@ const username = user ? user.username : 'Guest'
         )
     }
 </Layout>
+<script></script>
