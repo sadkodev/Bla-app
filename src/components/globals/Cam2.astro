@@ -2,17 +2,37 @@
 
 ---
 
-<button id="startButton">Start</button>
-<video id="cam-user" autoplay></video>
-<video id="cam-participant" autoplay></video>
+<button id="startButton" class="bg-green-500 w-1/4">Start</button>
+<video id="cam-user" class="w-1/4" autoplay></video>
+<video id="cam-participant" class="w-1/4" autoplay></video>
 
 <script>
     import adapter from 'webrtc-adapter'
     let cam_user: any
+    let cam_participant: any
     let startButton
-
     requestIdleCallback(() => {
+        
         const ws = new WebSocket('ws://localhost:8181')
+        let socketEventList:any = {};
+        let listUsers:any = [];
+        let stream = null
+        let connected = false
+        let socketSend = (even:any,  data:any) => {
+            data.event = even;
+            ws.send(JSON.stringify(data))
+        }
+        let My_ID = window.location.hash.slice(1);
+        async function SelectUser(user:Array<String>) {           
+            let userSelected:any = "";
+            let listUsers = user.reduce((acc, user, index) => {
+                return acc + `${index + 1}) ${user}\n`
+            }, "")
+            userSelected = window.prompt("Seleccione un usuario\n" + listUsers,"1");
+            userSelected = user[parseInt(userSelected)-1];
+            return userSelected;
+        }
+        
         const pc = new RTCPeerConnection({
             iceServers: [
                 { urls: 'stun:stun.l.google.com:19302' },
@@ -25,12 +45,17 @@
                 },
             ],
         })
+
+
+        
         const browserDetails =
             adapter.browserDetails.browser +
             ' ' +
             adapter.browserDetails.version
 
+
         cam_user = document.getElementById('cam-user')
+        cam_participant = document.getElementById('cam-participant')
         startButton = document.getElementById('startButton')
 
         if (startButton === null) {
@@ -38,84 +63,99 @@
         }
         startButton?.addEventListener('click', start)
 
-        function start() {
-            const constraints = {
-                video: true,
-                audio: true,
+       
+
+        async function start() {
+            stream = await getWebcamVideo(cam_user)
+            pc.onicecandidate = (event) => {
+                if (event.candidate) {
+                    socketSend('candidates', {
+                        candidate: event.candidate,
+                        id: My_ID,
+                    })
+                }
+            }
+            pc.addTrack(stream.getVideoTracks()[0], stream)
+            pc.addEventListener('track', (event) => {
+                const remoteStream = event.streams[0];
+                cam_participant.srcObject = remoteStream;
+                cam_participant.play();
+            });
+            
+            pc.createOffer().then((offer) => {
+                console.log("creando offer");
+                pc.setLocalDescription(offer)
+                socketSend('offer', {
+                    id: My_ID,
+                    offer: offer,
+                })
+            })
+
+            socketEventList.offer = async (message:any) => {
+                pc.setRemoteDescription(new RTCSessionDescription(message.offer))
+                pc.createAnswer().then((answer) => {
+                    pc.setLocalDescription(answer)
+                    socketSend('answer', {
+                        id: My_ID,
+                        user: message.user,
+                        answer: answer,
+                    })
+                })
             }
 
-            navigator.mediaDevices
-                .getUserMedia(constraints)
-                .then((stream) => {
-                    stream
-                        .getTracks()
-                        .forEach((track) => pc.addTrack(track, stream))
-                })
-                .catch((error) => {
-                    console.error('problems of conexion to pc', error)
-                })
 
-            pc.onicecandidate = ({ candidate }) => {
-                if (candidate) {
-                    ws.send(
-                        JSON.stringify({
-                            type: 'candidate',
-                            candidate: candidate,
-                        })
-                    )
+            socketEventList.candidates = async (message:any) => {
+                console.log("recibiendo candidates ", message.candidates);
+                if (message.candidates) {
+                    message.candidates.forEach((candidate:any) => {
+                        pc.addIceCandidate(new RTCIceCandidate(candidate))
+                    })
+                }else{
+                    socketSend('Req_candidates', {id: My_ID})
                 }
             }
 
-            pc.ontrack = ({ streams: [stream] }) => {
-                cam_user.srcObject = stream
+            socketEventList.answer = async (message:any) => {
+                console.log("recibiendo answer");
+                pc.setLocalDescription(message.answer)
             }
-
-            pc.createOffer()
-                .then((offer) => {
-                    return pc.setLocalDescription(offer)
-                })
-                .then(() => {
-                    ws.send(
-                        JSON.stringify({
-                            type: 'offer',
-                            data: pc.localDescription,
+            
+            socketEventList.connect = async (message:any) => {
+                if (!connected) { connected = true
+                    console.log("conectando");
+                    let users = listUsers.filter((user:any) => user !== My_ID)
+                    if (users.length > 0) {
+                        console.log("usuario perincipal");
+                        let userSelected = await SelectUser(users)
+                        socketSend('connect', {
+                            id: My_ID,
+                            user: userSelected,
                         })
-                    )
-                })
-                .catch((error) => {
-                    console.error('Error creating offer:', error)
-                })
+                    }
+                }
+            }
+
+           
         }
-
-        ws.onmessage = (message) => {
-            let data = JSON.parse(String(message.data))
-            console.log(typeof message.data)
-            console.log(message.data)
-
-            if (data.type === 'candidate') {
-                let candidate = new RTCIceCandidate(data.candidate)
-                pc.addIceCandidate(candidate).catch((error) => {
-                    console.error('Error adding candidate:', error)
-                })
-            }
-
-            if (data.type === 'offer') {
-                pc.setRemoteDescription(data.data)
-                pc.createAnswer().then((answer) => {
-                    ws.send(
-                        JSON.stringify({
-                            type: 'answer',
-                            data: answer,
-                        })
-                    )
-                })
-            }
-
-            if (data.type === 'answer') {
-                console.log('Answer:', data.data)
-            }
+    socketEventList.listUsers = async (message:any) => {
+        listUsers = message.users;
+    }
+    ws.onmessage = (message) => {
+        let Message = JSON.parse(String(message.data))
+        let objData = {...Message}
+        let event = Message.event
+        if (socketEventList[event]) {
+            delete objData.event
+            socketEventList[event](objData)
         }
+    }
+})
 
-        console.log('Browser:', browserDetails)
-    })
+async function getWebcamVideo(video1:any) {
+    let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    video1.srcObject = stream;
+    video1.muted = true;
+    video1.play();
+    return stream;
+}
 </script>
