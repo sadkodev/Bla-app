@@ -1,21 +1,20 @@
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
-import { defineConfig } from 'astro/config';
-import db from '@astrojs/db';
+import db from '@astrojs/db'
+import react from '@astrojs/react'
+import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
 
-import node from "@astrojs/node";
+import node from '@astrojs/node'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react(), tailwind(), db()],
-  output: 'server',
-  adapter: node({
-    mode: "standalone"
-  }),
-  vite: {
-    optimizeDeps: {
-      exclude: ['oslo']
-    }
-  }
-});
+    integrations: [react(), tailwind(), db()],
+    output: 'server',
+    adapter: node({
+        mode: 'standalone',
+    }),
+    vite: {
+        optimizeDeps: {
+            exclude: ['oslo'],
+        },
+    },
+})
