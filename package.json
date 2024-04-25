@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
-        "build": "astro check && astro build",
+        "build": "astro check && astro build --remote",
         "preview": "astro preview",
         "astro": "astro"
     },
@@ -20,12 +20,17 @@
         "@types/react": "18.2.74",
         "@types/react-dom": "18.2.24",
         "astro": "4.5.16",
+        "express": "^4.19.2",
         "lucia": "3.1.1",
         "oslo": "^1.2.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
+        "socket.io": "^4.7.5",
         "tailwindcss": "3.4.3",
         "typescript": "5.4.4",
         "webrtc-adapter": "9.0.1"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21"
     }
 }

@@ -10,11 +10,14 @@ export default defineConfig({
     integrations: [react(), tailwind(), db()],
     output: 'server',
     adapter: node({
-        mode: 'standalone',
+        mode: 'middleware',
     }),
     vite: {
         optimizeDeps: {
             exclude: ['oslo'],
+        },
+        ssr: {
+            noExternal: ['path-to-regexp'],
         },
     },
 })
