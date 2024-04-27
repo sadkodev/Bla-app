@@ -2,7 +2,7 @@ import express from 'express'
 // import { handler as ssrHandler } from '../dist/server/entry.mjs'
 
 const app = express()
-const PORT = 8181 || process.env.PORT
+const PORT = 4000 || process.env.PORT
 
 app.use('/', (req, res) => {
     res.send('Hello World')

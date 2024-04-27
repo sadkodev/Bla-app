@@ -1,14 +1,15 @@
 ---
-const { label, className, state } = Astro.props
+const { label, className, state, href } = Astro.props
 ---
 
-<button
+<a
     class:list={[
-        'bg-primary w-48 px-8 py-4 uppercase font-bold text-gray-100 rounded-xl hover:bg-primary/80',
+        'cursor-pointer inline-block shrink-0 rounded-md border border-primary bg-primary px-12 py-3  text-md font-medium  text-bg_color-light transition hover:bg-transparent hover:text-bg_color-light focus:outline-none focus:ring active:text-bg_color-dark',
         state ? className : '',
     ]}
+    href={href}
 >
     <slot name="left" />
     {label}
     <slot name="right" />
-</button>
+</a>

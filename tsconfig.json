@@ -15,7 +15,8 @@
             "@services/*": ["./services/*"],
             "@constants/*": ["./constants/*"],
             "@config/*": ["./config/*"],
-            "@layouts/*": ["./layouts/*"]
+            "@layouts/*": ["./layouts/*"],
+            "@client/*": ["./client/*"]
         }
     }
 }
