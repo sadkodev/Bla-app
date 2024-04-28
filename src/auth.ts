@@ -12,7 +12,7 @@ const adapter = new DrizzleSQLiteAdapter(db as any, Session, User)
 /**
  * Intancia principal de la aplicación Lucía.
  * @type {Lucia}
-*/
+ */
 export const lucia = new Lucia(adapter, {
     sessionCookie: {
         attributes: {

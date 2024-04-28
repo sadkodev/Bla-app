@@ -4,8 +4,8 @@ const { label, className, state, href } = Astro.props
 
 <a
     class:list={[
-        'cursor-pointer inline-block shrink-0 rounded-md border border-primary bg-primary px-12 py-3  text-md font-medium  text-bg_color-light transition hover:bg-transparent hover:text-bg_color-light focus:outline-none focus:ring active:text-bg_color-dark',
-        state ? className : '',
+        'cursor-pointer inline-block rounded-md border border-primary bg-primary px-12 py-3  text-md font-medium  text-bg_color-light transition hover:bg-transparent hover:text-bg_color-light focus:outline-none focus:ring active:text-bg_color-dark',
+        state && className,
     ]}
     href={href}
 >
