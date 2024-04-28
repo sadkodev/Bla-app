@@ -1,0 +1,16 @@
+// obtiene errores en runtime del servidor react
+        // child.stderr.on('data', (data) => {
+        //     parentPort.postMessage({
+        //         code: "error",
+        //         message: "child process errored",
+        //         data: data.toString()
+        //     })
+        // });
+        // obtiene el estado de finalización del servidor react
+        // child.on('close', (code) => {
+        //     parentPort.postMessage({
+        //         code: "closed",
+        //         message: "child process exited with code",
+        //         data: code.toString()
+        //     })
+        // });
