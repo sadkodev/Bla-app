@@ -3,7 +3,7 @@ import Header from '@components/globals/Header.astro'
 import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
-    title: string
+  title: string
 }
 
 const { title } = Astro.props
@@ -12,20 +12,20 @@ const languages = Astro.currentLocale
 
 <!doctype html>
 <html lang={languages}>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-        <ViewTransitions />
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
 
-    <body class="bg-bg_color-dark">
-        <Header />
-        <main class="flex flex-col w-full max-h-dvh">
-            <slot />
-        </main>
-    </body>
+  <body class="bg-bg_color-dark">
+    <Header />
+    <main class="flex flex-col w-full max-h-dvh">
+      <slot />
+    </main>
+  </body>
 </html>

@@ -1,8 +1,16 @@
 ---
-import Form from '@components/globals/Form.astro'
 import Layout from '@layouts/Layout.astro'
 ---
 
 <Layout title="Sign In">
-    <Form action="/api/signin" method="POST" cta="Log in" button={false} />
+  <!-- <Form
+        action="/api/auth/signup"
+        method="POST"
+        label2="Email"
+        cta="Create Account"
+        button={true}
+        className="flex flex-col item-center"
+        isButton={true}
+        cta2="Already have an account?"
+    /> -->
 </Layout>

@@ -1,22 +1,24 @@
 {
-    "extends": "astro/tsconfigs/strict",
-    "compilerOptions": {
-        "baseUrl": "./src",
-        "paths": {
-            "@": ["./src/*"],
-            "@components/*": ["./components/*"],
-            "@styles/*": ["./styles/*"],
-            "@utils/*": ["./utils/*"],
-            "@hooks/*": ["./hooks/*"],
-            "@context/*": ["./context/*"],
-            "@pages/*": ["./pages/*"],
-            "@assets/*": ["./assets/*"],
-            "@types/*": ["./types/*"],
-            "@services/*": ["./services/*"],
-            "@constants/*": ["./constants/*"],
-            "@config/*": ["./config/*"],
-            "@layouts/*": ["./layouts/*"],
-            "@client/*": ["./client/*"]
-        }
-    }
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": "/home/sadkodev/Workspace/bla-app/src",
+    "paths": {
+      "@": ["./src/*"],
+      "@components/*": ["./components/*"],
+      "@styles/*": ["./styles/*"],
+      "@utils/*": ["./utils/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@context/*": ["./context/*"],
+      "@pages/*": ["./pages/*"],
+      "@assets/*": ["./assets/*"],
+      "@types/*": ["./types/*"],
+      "@services/*": ["./services/*"],
+      "@constants/*": ["./constants/*"],
+      "@config/*": ["./config/*"],
+      "@layouts/*": ["./layouts/*"],
+      "@client/*": ["./client/*"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
 }
