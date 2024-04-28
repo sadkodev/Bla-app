@@ -5,17 +5,17 @@ import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [tailwind(), db()],
-    output: 'server',
-    adapter: node({
-        mode: 'middleware',
-    }),
-    vite: {
-        optimizeDeps: {
-            exclude: ['oslo'],
-        },
-        ssr: {
-            noExternal: ['path-to-regexp'],
-        },
+  integrations: [tailwind(), db()],
+  output: 'server',
+  adapter: node({
+    mode: 'middleware',
+  }),
+  vite: {
+    optimizeDeps: {
+      exclude: ['oslo'],
     },
+    ssr: {
+      noExternal: ['path-to-regexp'],
+    },
+  },
 })

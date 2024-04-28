@@ -8,16 +8,16 @@ const username = user ? user.username : 'Guest'
 ---
 
 <section>
-    <h1
-        class="bg-green-400 py-4 px-4 text-gray-200 dark:text-gray-800 font-bold uppercase"
-    >
-        {username}
-        {ipClient}
-    </h1>
-    <form action="/api/signout" method="POST">
-        <button class="bg-primary w-1/4 py-2 rounded-lg mt-4 ml-4">
-            Sign out
-        </button>
-    </form>
-    <Video />
+  <h1
+    class="bg-green-400 py-4 px-4 text-gray-200 dark:text-gray-800 font-bold uppercase"
+  >
+    {username}
+    {ipClient}
+  </h1>
+  <form action="/api/signout" method="POST">
+    <button class="bg-primary w-1/4 py-2 rounded-lg mt-4 ml-4">
+      Sign out
+    </button>
+  </form>
+  <Video />
 </section>

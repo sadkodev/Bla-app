@@ -14,24 +14,24 @@ const adapter = new DrizzleSQLiteAdapter(db as any, Session, User)
  * @type {Lucia}
  */
 export const lucia = new Lucia(adapter, {
-    sessionCookie: {
-        attributes: {
-            // set to `true` when using HTTPS
-            secure: import.meta.env.PROD,
-        },
+  sessionCookie: {
+    attributes: {
+      // set to `true` when using HTTPS
+      secure: import.meta.env.PROD,
     },
+  },
 
-    /**
-     * Función para obtener los atributos del usuario.
-     * @param {DatabaseUserAttributes} attributes - Atributos del usuario en la base de datos.
-     * @returns {object} - Atributos del usario para la sesión.
-     */
-    getUserAttributes: (attributes) => {
-        return {
-            // attributes has the type of DatabaseUserAttributes
-            username: attributes.username,
-        }
-    },
+  /**
+   * Función para obtener los atributos del usuario.
+   * @param {DatabaseUserAttributes} attributes - Atributos del usuario en la base de datos.
+   * @returns {object} - Atributos del usario para la sesión.
+   */
+  getUserAttributes: (attributes) => {
+    return {
+      // attributes has the type of DatabaseUserAttributes
+      username: attributes.username,
+    }
+  },
 })
 
 /**
@@ -39,18 +39,18 @@ export const lucia = new Lucia(adapter, {
  * @module lucia
  */
 declare module 'lucia' {
-    interface Register {
-        /**
-         * Clase principal de la aplicación Lucía.
-         * @type {typeof lucia}
-         */
-        Lucia: typeof lucia
-        /**
-         * Interfaz para los atributos de usario en la base de datos
-         * @type {DatabaseUserAttributes}
-         */
-        DatabaseUserAttributes: DatabaseUserAttributes
-    }
+  interface Register {
+    /**
+     * Clase principal de la aplicación Lucía.
+     * @type {typeof lucia}
+     */
+    Lucia: typeof lucia
+    /**
+     * Interfaz para los atributos de usario en la base de datos
+     * @type {DatabaseUserAttributes}
+     */
+    DatabaseUserAttributes: DatabaseUserAttributes
+  }
 }
 
 /**
@@ -58,9 +58,9 @@ declare module 'lucia' {
  * @interface DatabaseUserAttributes
  */
 interface DatabaseUserAttributes {
-    /**
-     * Nombre de usuario del usuario en la base de datos
-     * @type {string}
-     */
-    username: string
+  /**
+   * Nombre de usuario del usuario en la base de datos
+   * @type {string}
+   */
+  username: string
 }
