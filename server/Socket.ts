@@ -12,6 +12,13 @@ export default function Socket(server:Server_type): any{
       let sendSocket = to!==null?io.sockets.sockets.get(to)??socket.broadcast:socket.broadcast; 
       sendSocket.emit(event, data, socket.id);
     })
+    socket.on("disconnect", ()=>{
+      socket.broadcast.emit("leave", socket.id);
+    })
+    socket.on("getRoom", (room)=>{
+      const socketsInRoom = Array.from(io.sockets.adapter.rooms.get(room) || []);
+      socket.emit("getRoom", socketsInRoom);
+    })
   });
   return io;
 }
