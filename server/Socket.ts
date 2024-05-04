@@ -22,3 +22,5 @@ export default function Socket(server:Server_type): any{
   });
   return io;
 }
+
+// hello
