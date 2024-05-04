@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import http from "http";
 type Server_type = http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>;
-export default function Socket(server:Server_type): any{
+export default function socket(server:Server_type): any{
   const io = new Server(server);
   io.on("connection", (socket) => {
     socket.on("join", (room)=>{
