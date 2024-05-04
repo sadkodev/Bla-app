@@ -23,4 +23,4 @@ export default function socket(server:Server_type): any{
   return io;
 }
 
-// hello :)
+// hello
