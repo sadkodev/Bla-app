@@ -2,6 +2,11 @@ import adapter from 'webrtc-adapter'
 let cam_user: any
 let cam_participant: any
 let startButton
+/**
+ * This function establishes a WebSocket connection and a video call using WebRTC.
+ * It also handles events such as offers, answers, and ICE candidates.
+ * The requestIdleCallback function is used to execute the code when the browser has idle time to improve efficiency.
+ */
 requestIdleCallback(() => {
   const ws = new WebSocket('ws://localhost:8181')
   let socketEventList: any = {}
