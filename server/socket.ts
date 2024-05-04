@@ -1,11 +1,11 @@
-import { Server } from 'socket.io'
 import http from 'http'
+import { Server } from 'socket.io'
 type Server_type = http.Server<
   typeof http.IncomingMessage,
   typeof http.ServerResponse
 >
 export default function socket(server: Server_type): any {
-  const io = new Server(server)
+  const io = new Server(server, { cors: { origin: '*' } })
   io.on('connection', (socket) => {
     socket.on('join', (room) => {
       socket.join(room)
@@ -28,5 +28,3 @@ export default function socket(server: Server_type): any {
   })
   return io
 }
-
-// hello

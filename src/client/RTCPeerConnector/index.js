@@ -1,5 +1,8 @@
 import iceServers from './iceServers.js'
+
 export default function RTCPeerConnector(socket) {
+  const room = 'default'
+
   const eventNames = {
     offer: 'offer',
     answer: 'answer',
